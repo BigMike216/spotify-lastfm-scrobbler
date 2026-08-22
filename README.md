@@ -1,6 +1,6 @@
 # Overview 
 
-Its an script that helps to upload Spotify listening history to last.fm. <br><br>
+Its an script that helps to upload your old Spotify listening history to last.fm. <br><br>
 
 ## STEPS TO FOLOW 
 <br><br>
@@ -17,11 +17,11 @@ Its an script that helps to upload Spotify listening history to last.fm. <br><br
 - Go to https://www.python.org/downloads/ and install and run it.
 - After installing open the terminal ( Windows+ R and type cmd and enter) and 
   in the type 
-  ```
-  python --version
-  ```
+```
+python --version
+```
   to check if u have successfully installed python.
-- Get VS code too to edit the files "https://code.visualstudio.com/download". <br><br>
+- Get VS code (optional but helpful for editing files) "https://code.visualstudio.com/download". <br><br>
 
 
 **Step 3: Install Required Libraries**
@@ -30,59 +30,59 @@ Its an script that helps to upload Spotify listening history to last.fm. <br><br
 ```
 pip install pylast pandas python-dotenv
 ```
-  click enter and it will be installed. <br><br>
+  hit enter and it will be installed. <br><br>
 
 
-**Step 4: Convert .json file to .csv file and Split it**
+**Step 4: Convert .json file to .csv part file**
 
-1. Click on "Clone" and download the ZIP file, then extract it.
+1. Click on "<> Code" and download the ZIP file, then extract it.
 
-2. After extraction, open the extracted folder — you might see another folder with the same name   
-   inside. Copy the last extracted folder (the one that contains all the files) and move or paste it anywhere you like.
+2. After extraction, open the folder. You will find a folder with the same name. 
+   Copy the innermost folder (containing all the actual files) and paste it in desktop.
 
-3. Upload the Spotify history files should look smt like this- 
-   **StreamingHistory_music_0** (if its Streaming history for the past year)  
+3. Upload the Spotify history files in that desktop folder 
+the files should look smt like this- 
+
+   **StreamingHistory_music_0** 
    or 
-   **Streaming_History_Audio_2024-2025_0** (if its Extended streaming history)
-   so upload this files in json to csv folder (you can upload both if u have) 
+   **Streaming_History_Audio_2024-2025_0**
 
 
 4. Your folder should now look smt like this:
    <pre>
-        📁 json to csv
+        📁 spotify-lastfm-scrobbler-master
+        ├── .env 
         ├── converter.py
-        ├── output.csv
+        ├── lastfm_scrobbler.py 
+        ├── README.md
         ├── StreamingHistory_music_0.json
         ├── StreamingHistory_music_1.json
         └── ... (any other StreamingHistor_music files) 
    </pre>
 
-   OR
+5. Right click on the folder and open terminal.
 
-   <pre>  
-        📁 json to csv
-        ├── converter.py
-        ├── Streaming_History_Audio_202x-202x_0
-        ├── Streaming_History_Audio_202x_1
-        └── ... (any other Streaming_History_Audio files) 
-   </pre>
+6. In the terminal type this and hit enter.
+```
+python converter.py
+```
 
-> 💭 Note:
-> So Last.fm has a limit of around 2800-3000 scrobbles per day. Going above this might cause    
+7. Now your history files will will be converted to parts and saved in MusicCSV folder
+
+> 💭 Note: 
+> So Last.fm has a limit of around 2800-3000 scrobbles per day. Going above this might cause
 > rate-limit errors or temporary submission blocks.
+> (this has now prob changed to 650-700 scrobles per day)  
 > This script automatically splits large CSV files into smaller parts.
-> (each containing about 2600 songs)
+> (each containing about 2800 [now 650] songs) 
 > Also the Last.fm API supports sending multiple scrobbles in a single request 
 > (up to 50 tracks per call).
+> I have kept the part file limit to 650 but if u want to experiment by uploding more song then 
+> go to converter.py (line no 13) and change 650 to 700 or any other number
 
-<br><br>
+
 **Step 5: The EXECUTION**
 
-- Create a new folder- 
-```
-CSVtoLast.fm
-```
-- Add the "lastfm_scrobbler.py" and ".env" file 
 - Go to https://www.last.fm/api/account/create
 
 - **Create an API account**
@@ -93,26 +93,23 @@ CSVtoLast.fm
     Password (your Last.fm password)
 - And replace that info in ".env" file.
 
-- Create a *new folder Music History inside CSVtoLast.fm folder* 
-  and inside Music History folder add all the 
-  part0,1,2... files.
-
-- Your folder should now look smt like this 
+- Your final folder shoul look smt like this
 
 <pre>
-    📁 CSVtoLast.fm
+    📁 spotify-lastfm-scrobbler-master
     ├── 📁 MusicCSV
     │   ├── part0.csv
     │   ├── part1.csv
     │   ├── part2.csv
     │   ├── ...
     │   └── part10.csv
-    ├── .env
-    └── lastfm_scrobbler.py 
+    ├── .env       
+    ├── converter.py
+    ├── lastfm_scrobbler.py 
+    └── README.md
 </pre>
 
-- Now go to CSVtoLast.fm folder right click on it and open terminal 
-  and type this and hit ENTER. 
+- Now right click again on the folder and open terminal and type this and hit ENTER. 
   ```
   python lastfm_scrobbler.py
   ```
