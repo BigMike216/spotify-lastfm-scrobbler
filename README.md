@@ -28,7 +28,7 @@ python --version
 
 - Go to Windows PowerShell and type 
 ```
-pip install pylast pandas python-dotenv
+pip install pylast pandas python-dotenv requests
 ```
   hit enter and it will be installed. <br><br>
 
